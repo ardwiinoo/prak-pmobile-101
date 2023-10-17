@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">prak-pmobile-101</string>
+    <string name="merah">Merah</string>
+    <string name="hijau">Hijau</string>
 </resources>
