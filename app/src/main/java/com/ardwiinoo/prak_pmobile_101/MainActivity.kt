@@ -1,47 +1,49 @@
 package com.ardwiinoo.prak_pmobile_101
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.ardwiinoo.prak_pmobile_101.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private var jenisKelamin: String = ""
+    private var tampilSetuju: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.d(TAG, "onCreate")
-    }
+        binding.apply {
+            btnSubmit.setOnClickListener {
+                val nama = isinama.text.toString()
 
-    override fun onResume() {
-        super.onResume()
+                if(rdb1.isChecked) {
+                    jenisKelamin = "Laki-laki"
+                }
+                if(rdb2.isChecked) {
+                    jenisKelamin = "Perempuan"
+                }
 
-        Log.d(TAG, "onResume")
-    }
+                tampilSetuju = checkAgree.isChecked
 
-    override fun onPause() {
-        super.onPause()
+                // pindah ke hasil activity (explicits)
+//               startActivity(Intent(this@MainActivity, HasilActivity::class.java).apply {
+//                   putExtra(HasilActivity.DATA_NAMA, nama)
+//                   putExtra(HasilActivity.DATA_JENIS_KELAMIN, jenisKelamin)
+//                   putExtra(HasilActivity.DATA_SETUJU, tampilSetuju)
+//               })
 
-        Log.d(TAG, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        Log.d(TAG, "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        Log.d(TAG, "onDestroy")
-    }
-
-    companion object {
-        val TAG: String = MainActivity::class.java.simpleName
+                // implicit
+                startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("https://tif.uad.ac.id")
+                })
+            }
+        }
     }
 }

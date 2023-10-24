@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">prak-pmobile-101</string>
+    <string name="silahkan_isi_nama_anda">Silahkan Isi Nama Anda</string>
+    <string name="laki_laki">Laki-laki</string>
+    <string name="perempuan">Perempuan</string>
+    <string name="semua_yang_diisikan_benar">Semua Yang Diisikan Benar</string>
+    <string name="tampil_nama">Tampil Nama</string>
+    <string name="tampil_jenis_kelamin">Tampil Jenis Kelamin</string>
+    <string name="tampil_setuju">Tampil Setuju</string>
 </resources>
