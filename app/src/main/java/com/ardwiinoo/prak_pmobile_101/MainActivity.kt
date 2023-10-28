@@ -1,47 +1,94 @@
 package com.ardwiinoo.prak_pmobile_101
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.ardwiinoo.prak_pmobile_101.databinding.ActivityMainBinding
+import com.ardwiinoo.prak_pmobile_101.datasource.local.DatabaseBarang
+import com.ardwiinoo.prak_pmobile_101.datasource.local.dao.BarangDao
+import com.ardwiinoo.prak_pmobile_101.datasource.local.entity.Barang
+import com.ardwiinoo.prak_pmobile_101.utils.AppExecutor
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var db: DatabaseBarang
+    private lateinit var barangDao: BarangDao
+    private lateinit var appExecutor: AppExecutor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.d(TAG, "onCreate")
+        db = DatabaseBarang.getDatabase(this)
+        barangDao = db.barangDao()
+        appExecutor = AppExecutor()
+
+        binding.apply {
+            fabAdd.setOnClickListener {
+                appExecutor.diskIO.execute {
+
+                    insertDummyData()
+                }
+
+                val listBarang: LiveData<List<Barang>> = barangDao.getAllBarang()
+                listBarang.observe(this@MainActivity, Observer { list ->
+
+                    val namaBarang = list.map {
+                        it.nama
+                    }
+
+                    lvRoomDb.adapter = ArrayAdapter(
+                        this@MainActivity,
+                        android.R.layout.simple_list_item_1,
+                        namaBarang
+                    )
+
+                    lvRoomDb.setOnItemClickListener { _, _, position, _ ->
+                        val selectedBarang = list[position]
+
+                        val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                        intent.putExtra("barang_id", selectedBarang.id)
+
+                        startActivity(intent)
+                    }
+                })
+            }
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun insertDummyData() {
 
-        Log.d(TAG, "onResume")
-    }
+        val listNamaBarang = listOf<String>(
+            "Meja", "Kursi", "Komputer", "Laptop"
+        )
 
-    override fun onPause() {
-        super.onPause()
+        val listJenisBarang = listOf<String>(
+            "Furnitur", "Furnitur", "Elektronik", "Elektronik"
+        )
 
-        Log.d(TAG, "onPause")
-    }
+        val listHargaBarang = listOf<Int>(
+            850000, 200000, 5000000, 6000000
+        )
 
-    override fun onStop() {
-        super.onStop()
+        val listStatusBarang = listOf<Int>(
+            0, 1, 0, 1
+        )
 
-        Log.d(TAG, "onStop")
-    }
+        for(i in 0 .. 3) {
+            val newBarang = Barang(
+                nama = listNamaBarang[i],
+                jenis = listJenisBarang[i],
+                harga = listHargaBarang[i],
+                status = listStatusBarang[i]
+            )
 
-    override fun onDestroy() {
-        super.onDestroy()
-
-        Log.d(TAG, "onDestroy")
-    }
-
-    companion object {
-        val TAG: String = MainActivity::class.java.simpleName
+            barangDao.insert(newBarang)
+        }
     }
 }
