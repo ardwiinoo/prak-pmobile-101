@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ardwiinoo.prak_pmobile_101.databinding.ActivityMainBinding
 import com.ardwiinoo.prak_pmobile_101.datasource.local.DatabaseBarang
 import com.ardwiinoo.prak_pmobile_101.datasource.local.dao.BarangDao
@@ -38,25 +39,11 @@ class MainActivity : AppCompatActivity() {
 
                 val listBarang: LiveData<List<Barang>> = barangDao.getAllBarang()
                 listBarang.observe(this@MainActivity, Observer { list ->
+                    val layoutManager = LinearLayoutManager(this@MainActivity)
+                    rvRoomDb.layoutManager = layoutManager
 
-                    val namaBarang = list.map {
-                        it.nama
-                    }
-
-                    lvRoomDb.adapter = ArrayAdapter(
-                        this@MainActivity,
-                        android.R.layout.simple_list_item_1,
-                        namaBarang
-                    )
-
-                    lvRoomDb.setOnItemClickListener { _, _, position, _ ->
-                        val selectedBarang = list[position]
-
-                        val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                        intent.putExtra("barang_id", selectedBarang.id)
-
-                        startActivity(intent)
-                    }
+                    val adapter = BarangAdapter(list)
+                    rvRoomDb.adapter = adapter
                 })
             }
         }

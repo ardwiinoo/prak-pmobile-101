@@ -1,6 +1,7 @@
 package com.ardwiinoo.prak_pmobile_101
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ardwiinoo.prak_pmobile_101.databinding.ActivityDetailBinding
@@ -61,6 +62,11 @@ class DetailActivity : AppCompatActivity() {
 
                             finish()
                         }
+                    }
+
+                    btnHewan.setOnClickListener {
+                        val intent = Intent(this@DetailActivity, PostestActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }

@@ -56,4 +56,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hapus data"/>
+
+    <Button
+        android:id="@+id/btnHewan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lihat List Yang Lain"/>
 </LinearLayout>

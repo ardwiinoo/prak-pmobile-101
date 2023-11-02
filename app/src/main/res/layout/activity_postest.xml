@@ -8,21 +8,9 @@
     android:padding="16dp">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRoomDb"
+        android:id="@+id/rvHewan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_barang"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/baseline_add_24"
-        app:fabSize="normal"
-        />
 
 </RelativeLayout>
