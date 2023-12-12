@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "850566561307",
+    "project_id": "prak-pmobile-101",
+    "storage_bucket": "prak-pmobile-101.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850566561307:android:f3f2bf80da639ac83c02be",
+        "android_client_info": {
+          "package_name": "com.ardwiinoo.prak_pmobile_101"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMOZwYrd_JkEqbByQm1f6O85a-GPK4hyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
