@@ -37,18 +37,14 @@ class MainActivity : AppCompatActivity() {
                         val jabatan = employee.getString("jabatan")
                         val tglKerja = employee.getString("tgl_kerja")
                         val gaji = employee.getString("gaji")
-                        Log.d("cekdata",employeeName)
                         employees.add(ModelKaryawan(employeeId,employeeName,jabatan,tglKerja,gaji))
                     }
                     val adapter = Adapter(employees)
                     binding.rvEmployee.adapter = adapter
                 }
                 override fun onError(anError: com.androidnetworking.error.ANError) {
+                    // Tangani kesalahan di sini
                 }
             })
-        binding.fabAddEmployee.setOnClickListener {
-            val intent = Intent(this, PekerjaanActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
