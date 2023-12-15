@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ardwiinoo.prak_pmobile_101.databinding.ItemPekerjaanBinding
 import com.ardwiinoo.prak_pmobile_101.model.ModelPekerjaan
+import com.bumptech.glide.Glide
 
 class AdapterPekerjaan(private val data: List<ModelPekerjaan>) :
     RecyclerView.Adapter<AdapterPekerjaan.PekerjaanViewHolder>() {
@@ -13,6 +14,10 @@ class AdapterPekerjaan(private val data: List<ModelPekerjaan>) :
         fun bind(employee: ModelPekerjaan) {
             binding.tvNama.text = employee.nama
             binding.tvShift.text = employee.shift
+            Glide.with(binding.root.context)
+                .load(employee.photoUrl)
+                .centerCrop()
+                .into(binding.ivPhotos)
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PekerjaanViewHolder {
