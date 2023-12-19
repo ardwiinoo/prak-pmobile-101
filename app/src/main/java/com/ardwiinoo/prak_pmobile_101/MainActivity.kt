@@ -46,8 +46,14 @@ class MainActivity : AppCompatActivity() {
                 override fun onError(anError: com.androidnetworking.error.ANError) {
                 }
             })
+
         binding.fabAddEmployee.setOnClickListener {
             val intent = Intent(this, PekerjaanActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.fabGoToMaps.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
     }
